@@ -1,11 +1,11 @@
 from flask import Flask
+from flask_admin.contrib.sqla import ModelView
 
 from src.config import Config
-#from src.views
-from src.ext import db, migrate
+from src.ext import db, migrate, admin, dpi
 from src.commands import init_db, populate_db
-
-BLUEPRINTS = []
+from src.api import UserApi
+from src.models import User
 
 COMMANDS = [init_db, populate_db]
 
@@ -15,19 +15,17 @@ def create_app():
 
     register_extensions(app)
 
-    register_blueprints(app)
-
     register_commands(app)
 
     return app
 
-def register_blueprints(app):
-    for bp in BLUEPRINTS:
-        app.register_blueprint(bp)
 
 def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
+    admin.init_app(app)
+    admin.add_views(ModelView(User, db.session))
+    dpi.init_app(app)
 
 def register_commands(app):
     for cmd in COMMANDS:
