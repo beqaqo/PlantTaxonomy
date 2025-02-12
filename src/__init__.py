@@ -1,11 +1,9 @@
 from flask import Flask
-from flask_admin.contrib.sqla import ModelView
 
 from src.config import Config
-from src.ext import db, migrate, admin, dpi
+from src.ext import db, migrate, dpi
 from src.commands import init_db, populate_db
-from src.api import UserApi
-from src.models import User
+from src.models import Plant
 
 COMMANDS = [init_db, populate_db]
 
@@ -23,8 +21,6 @@ def create_app():
 def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
-    admin.init_app(app)
-    admin.add_views(ModelView(User, db.session))
     dpi.init_app(app)
 
 def register_commands(app):
