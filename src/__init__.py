@@ -1,7 +1,8 @@
 from flask import Flask
 
+from src.api import plant
 from src.config import Config
-from src.ext import db, migrate, dpi
+from src.ext import db, migrate, api
 from src.commands import init_db, populate_db
 from src.models import Plant
 
@@ -21,7 +22,7 @@ def create_app():
 def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
-    dpi.init_app(app)
+    api.init_app(app)
 
 def register_commands(app):
     for cmd in COMMANDS:

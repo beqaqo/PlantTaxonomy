@@ -4,4 +4,4 @@ from flask_restx import Api
 
 db = SQLAlchemy()
 migrate = Migrate()
-dpi = Api()
+api = Api()
