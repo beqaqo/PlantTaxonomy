@@ -12,7 +12,7 @@ parser.add_argument("sort", type=str, required=False)
 limit = 10
 
 @api.route("/plant")
-class UserApi(Resource):
+class PlantAPI(Resource):
     @api.expect(parser)
     def get(self,):
         args = parser.parse_args()
