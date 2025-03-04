@@ -35,7 +35,9 @@ class PlantAPI(Resource):
         plants_json = [{"id": plant.id,
                         "name" : plant.name,
                         "eng_name" : plant.eng_name,
-                        "lat_name": plant.lat_name,
+                        "family_name": plant.family_name,
+                        "family_name_geo": plant.family_name_geo,
+                        "description": plant.description,
                         "image": plant.image} for plant in plants]
 
         return plants_json, 200
@@ -45,8 +47,10 @@ class PlantAPI(Resource):
     def get(self, id):
         plant = Plant.query.get_or_404(id)
         plants_json = [{"id": plant.id,
-                        "name": plant.name,
-                        "eng_name": plant.eng_name,
-                        "lat_name": plant.lat_name,
+                        "name" : plant.name,
+                        "eng_name" : plant.eng_name,
+                        "family_name": plant.family_name,
+                        "family_name_geo": plant.family_name_geo,
+                        "description": plant.description,
                         "image": plant.image}]
         return plants_json, 200
