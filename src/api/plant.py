@@ -9,7 +9,7 @@ parser.add_argument("page", type=int, default=1, required=True)
 parser.add_argument("search", type=str, required=False)
 parser.add_argument("sort", type=str, required=False)
 
-limit = 10
+limit = 20
 
 @api.route("/plant")
 class PlantAPI(Resource):
