@@ -47,13 +47,15 @@ def gen_sample():
         used_names.add(name)
 
         eng_name = name
-        lat_name = f"{name[::-1]}"
+        family_name = f"{name[::-1]}"
         image = f"{name.replace(' ', '_').lower()}_image.jpg"
 
         plant = Plant(
             name=name,
             eng_name=eng_name,
-            lat_name=lat_name,
+            family_name=family_name,
+            family_name_geo=family_name,
+            description=family_name,
             image=image
         )
         plants.append(plant)
