@@ -30,6 +30,8 @@ class PlantAPI(Resource):
         elif sort == "desc":
             plants = plants.order_by(Plant.name.desc())
 
+        total_items = plants.count()
+
         plants = plants.limit(limit).offset((page - 1) * limit)
 
         plants_json = [{"id": plant.id,
@@ -40,7 +42,17 @@ class PlantAPI(Resource):
                         "description": plant.description,
                         "image": plant.image} for plant in plants]
 
-        return plants_json, 200
+        response = {
+            "plants": plants_json,
+            "pagination": {
+                "currentPage": page,
+                "totalPages": (total_items // limit) + (1 if total_items % limit > 0 else 0),
+                "pageSize": limit,
+                "totalItems": total_items,
+            }
+        }
+
+        return response, 200
 
 @api.route("/plant/<int:id>")  # Route for a specific plant
 class PlantAPI(Resource):
