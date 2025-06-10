@@ -1,10 +1,11 @@
 from flask import Flask
 
+from src.admin import register_admin_views, MyAdminIndexView
 from src.api import plant, question
 from src.config import Config
-from src.ext import db, migrate, api
+from src.ext import db, migrate, api, admin, login_manager
 from src.commands import init_db, populate_db
-from src.models import Plant, Question
+from src.models import Plant, Question, User
 
 COMMANDS = [init_db, populate_db]
 
@@ -23,6 +24,13 @@ def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
     api.init_app(app)
+    admin.init_app(app, index_view=MyAdminIndexView())
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return db.session.get(User, int(user_id))
+    register_admin_views()
 
 def register_commands(app):
     for cmd in COMMANDS:
