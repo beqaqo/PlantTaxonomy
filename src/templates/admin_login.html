@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login</title>
+  <style>
+    /* Base styling */
+    body {
+      background: #f4faf6;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background: white;
+      padding: 2.5rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(102, 175, 101, 0.2);
+      width: 320px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #4caf50; /* natural light green */
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      margin-top: 0.3rem;
+      border: 2px solid #c6e0b4; /* lighter green border */
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #4caf50;
+      box-shadow: 0 0 8px #a2d39c;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 1.5rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #4caf50;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #3b8e40;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form method="post">
+      <label for="username">Username
+        <input type="text" id="username" name="username" required />
+      </label>
+      <label for="password">Password
+        <input type="password" id="password" name="password" required />
+      </label>
+      <input type="submit" value="Login" />
+    </form>
+  </div>
+</body>
+</html>
