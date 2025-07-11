@@ -62,11 +62,30 @@ class PlantAdmin(AuthModelView):
     edit_modal = True
     column_searchable_list = ['name', 'eng_name', 'family_name', 'family_name_geo', ]
 
+
 class QuestionAdmin(AuthModelView):
-    form_columns = ['pair_number', 'text', 'next_pair_number', 'plant_id', ]
+    form_extra_fields = {
+        'image': ImageUploadField(
+            label='Image',
+            base_path=Config.UPLOAD_PATH,
+            relative_path='',
+            url_relative_path='/static/',
+            allowed_extensions=['jpg', 'png', 'jpeg']
+        )
+    }
+
+    column_formatters = {
+        'image': lambda v, c, m, p: Markup(f'<img src="/static/{m.image}" style="height: 100px;">') if m.image else '',
+        'text': lambda v, c, m, p: (m.text[:100] + '...') if m.text and len(
+            m.text) > 100 else m.text
+    }
+
+    column_list = ['pair_number', 'text', 'next_pair_number', 'plant_id', 'image']
+    column_searchable_list = ['text', 'pair_number', 'next_pair_number', 'plant_id']
+    form_columns = ['pair_number', 'text', 'next_pair_number', 'plant_id', 'image']
     create_modal = True
     edit_modal = True
-    column_searchable_list = ['text', 'pair_number', 'next_pair_number', 'plant_id']
+
 
 def register_admin_views():
     admin.add_view(PlantAdmin(Plant, db.session))

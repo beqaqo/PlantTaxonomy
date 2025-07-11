@@ -18,11 +18,13 @@ class QuestionAPI(Resource):
                 "question": question.text,
                 "next_question_id": next_question1.id if next_question1 else None,
                 "identified_plant_id": question.plant_id,
+                "image": question.image if question.image else None
             },
             {
                 "question": paired_question.text,
                 "next_question_id": next_question2.id if next_question2 else None,
                 "identified_plant_id": paired_question.plant_id,
+                "image": paired_question.image if paired_question.image else None
             }
         ]
         return response, 200
