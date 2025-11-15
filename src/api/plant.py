@@ -34,9 +34,9 @@ class PlantAPI(Resource):
             )
 
         if sort == "asc":
-            plants = plants.order_by(Plant.name.asc())
+            plants = plants.order_by(Plant.family_name.asc())
         elif sort == "desc":
-            plants = plants.order_by(Plant.name.desc())
+            plants = plants.order_by(Plant.family_name.desc())
 
         total_items = plants.count()
 
