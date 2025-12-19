@@ -80,18 +80,26 @@ class QuestionAdmin(AuthModelView):
         )
     }
 
+    form_ajax_refs = {
+        'plant': {
+            'fields': ('name', 'eng_name', 'family_name'),
+            'page_size': 10
+        }
+    }
+
     column_formatters = {
+        'plant': lambda v, c, m, p: m.plant.family_name if m.plant else '',
         'image': lambda v, c, m, p: Markup(f'<img src="/static/{m.image}" style="height: 100px;">') if m.image else '',
         'text': lambda v, c, m, p: (m.text[:100] + '...') if m.text and len(
             m.text) > 100 else m.text
     }
+    form_widget_args = {
+        'text': {'rows': 10, 'style': 'width: 100%; font-size: 16px;'}
+    }
 
-    column_list = ['pair_number', 'text', 'next_pair_number', 'plant_id', 'image']
+    column_list = ['pair_number', 'text', 'next_pair_number', 'plant', 'image']
     column_searchable_list = ['text', 'pair_number', 'next_pair_number', 'plant_id']
-    form_columns = ['pair_number', 'text', 'next_pair_number', 'plant_id', 'image']
-    create_modal = True
-    edit_modal = True
-
+    form_columns = ['pair_number', 'text', 'next_pair_number', 'plant', 'image']
 
 def register_admin_views():
     admin.add_view(PlantAdmin(Plant, db.session))
