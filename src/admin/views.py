@@ -4,7 +4,6 @@ from src.models import User
 from src.config import Config
 
 from flask_admin import AdminIndexView, expose
-from flask_admin.menu import MenuLink
 from flask_admin.form.upload import ImageUploadField
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user, login_user, logout_user
@@ -39,7 +38,7 @@ class MyAdminIndexView(AdminIndexView):
         logout_user()
         return redirect(url_for('.login_view'))
 
-    admin.add_link(MenuLink(name='Logout', category='', url="/admin/logout"))
+
 
 class AuthModelView(ModelView):
     def is_accessible(self):
